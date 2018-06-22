@@ -12,16 +12,20 @@
 <head>
     <meta charset="UTF-8">
     <title>TEST</title>
+
+    <link href="<c:url value="/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet">
 </head>
 <body>
-<table border="1">
+<table class="table table-striped">
+    <thead>
     <tr>
         <td>ID</td>
         <td>Username</td>
         <td>Password</td>
         <td>Role</td>
-
     </tr>
+    </thead>
+    <tbody>
     <c:forEach var="user" items="${users}">
         <tr>
             <td>${user.id}</td>
@@ -30,14 +34,14 @@
             <td>${user.roleToString}</td>
             <td><form method="post" action="/changeRoleToUser">
                 <input type="hidden" name="id" value="${user.id }">
-                <input type="submit"value="ToUser"></form></td>
+                <input type="submit" class="btn btn-info" value="ToUser"></form></td>
             <td><form method="post" action="/changeRoleToAdmin">
                 <input type="hidden" name="id" value="${user.id }">
-                <input type="submit"value="ToAdmin">
+                <input type="submit" class="btn btn-info" value="ToAdmin">
             </form></td>
         </tr>
     </c:forEach>
-
+    </tbody>
 </table>
 <br>
 <br>

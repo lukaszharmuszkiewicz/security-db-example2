@@ -4,15 +4,13 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "[User]")
-public class Users {
+@Table(name = "[User]", catalog = "dbo")
+public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "name")
-    private String name;
     @Column(name = "password")
     private String password;
     @Column(name = "username")
@@ -21,12 +19,11 @@ public class Users {
     @JoinTable(name = "[user_role]", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(Users users) {
+    public User(User users) {
         this.roles = users.getRoles();
-        this.name = users.getName();
         this.username =users.getUsername();
         this.id = users.getId();
         this.password = users.getPassword();
@@ -48,15 +45,7 @@ public class Users {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLastName(String lastName) {
+    public void setUsername(String lastName) {
         this.username = lastName;
     }
 
@@ -70,5 +59,10 @@ public class Users {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getRoleToString()
+    {
+        return this.getRoles().iterator().next().getRole();
     }
 }

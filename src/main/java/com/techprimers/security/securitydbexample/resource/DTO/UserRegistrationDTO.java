@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by Lukasz on 17.06.2018.
  */
-public class UserRegistrationDto {
+public class UserRegistrationDTO {
 
     @NotNull
     private String name;

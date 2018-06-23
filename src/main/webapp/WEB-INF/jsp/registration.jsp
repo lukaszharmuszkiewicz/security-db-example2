@@ -40,13 +40,6 @@
     <form:form method="POST" action="/registration" modelAttribute="userForm" class="form-signin">
         <h2 class="form-signin-heading">Create your account</h2>
 
-        <spring:bind path="name">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="name" class="form-control" placeholder="Name"
-                            autofocus="true"></form:input>
-                <form:errors path="name"></form:errors>
-            </div>
-        </spring:bind>
 
         <spring:bind path="username">
             <div class="form-group ${status.error ? 'has-error' : ''}">

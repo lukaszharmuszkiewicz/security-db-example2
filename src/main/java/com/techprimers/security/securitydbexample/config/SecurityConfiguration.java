@@ -42,7 +42,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .permitAll()
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");;
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login")
+                .and()
+                .exceptionHandling().accessDeniedPage("/accessDenied");;
+
     }
 
     private PasswordEncoder getPasswordEncoder() {

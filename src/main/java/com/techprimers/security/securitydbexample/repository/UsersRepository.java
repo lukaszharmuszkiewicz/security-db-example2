@@ -3,6 +3,7 @@ package com.techprimers.security.securitydbexample.repository;
 import com.techprimers.security.securitydbexample.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Optional;
 

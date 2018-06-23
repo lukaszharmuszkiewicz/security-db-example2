@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 
@@ -38,6 +39,13 @@ public class HelloResource {
     public String alternate() {
         return "USER";
     }
+
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(){
+        return "login";
+    }
+
 
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -79,16 +87,25 @@ public class HelloResource {
 userService.changeRoleToAdmin(userService.loadUserById(id).get());
 
 
-        List<User> users = userService.findAll();
+        List<User> users = userService.loadAll();
         return new ModelAndView("role","users", users);
     }
 
     @RequestMapping(value = "/role", method = RequestMethod.GET)
-    public ModelAndView role()
+    public ModelAndView role(Principal user)
     {
 
-        List<User> users = userService.findAll();
+        List<User> users = userService.loadAll();
         return new ModelAndView("role","users", users);
+    }
+
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public ModelAndView user(Principal user)
+    {
+        if(!(user == null))
+            return new ModelAndView("user", "user", user.getName());
+        else
+            return new ModelAndView("user", "user", "brak");
     }
 
     @RequestMapping(value = "/changeRoleToUser", method = RequestMethod.POST)
@@ -99,7 +116,7 @@ userService.changeRoleToAdmin(userService.loadUserById(id).get());
         userService.changeRoleToUser(userService.loadUserById(id).get());
 
 
-        List<User> users = userService.findAll();
+        List<User> users = userService.loadAll();
         return new ModelAndView("role","users", users);
     }
 

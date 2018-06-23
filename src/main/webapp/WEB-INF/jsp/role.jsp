@@ -9,6 +9,7 @@
 <html lang="en">
 <%@ page language="java" import="java.util.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
 <head>
     <meta charset="UTF-8">
     <title>TEST</title>
@@ -47,6 +48,17 @@
 <br>
 <form method="get" action="/logout">
     <input type="submit"value="WYLOGUJ">
+</form>
+<br>
+<br>
+<form method="get" action="/login">
+    <input type="submit"value="ZALOGUJ">
+</form>
+
+<br>
+<br>
+<form method="get" action="/registration">
+    <input type="submit"value="REJESTRACJA">
 </form>
 
 

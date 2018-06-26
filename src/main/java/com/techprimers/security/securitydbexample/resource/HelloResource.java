@@ -2,6 +2,7 @@ package com.techprimers.security.securitydbexample.resource;
 
 
 import com.techprimers.security.securitydbexample.model.User;
+import com.techprimers.security.securitydbexample.resource.DTO.UserRegistrationDTO;
 import com.techprimers.security.securitydbexample.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -56,24 +57,26 @@ public class HelloResource {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("username") User userForm, BindingResult bindingResult, Model model) {
+    public String registration(@ModelAttribute("username") UserRegistrationDTO userRegistrationDTO, BindingResult bindingResult, Model model) {
         //userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-
-        userService.save(userForm);
+        User user = new User();
+        user.setUsername(userRegistrationDTO.getUsername());
+        user.setPassword(userRegistrationDTO.getPassword());
+        userService.save(user);
 
        // securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
 
-        return "redirect:/welcome";
+        return "login";
     }
 
     @RequestMapping(value = "/changeRole", method = RequestMethod.GET)
     public String changeRole(Model model)
     {
-        model.addAttribute("username", new User());
+        model.addAttribute("username", new UserRegistrationDTO());
         //userService.changeRole();
 
         return "changeRole";
